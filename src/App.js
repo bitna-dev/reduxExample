@@ -1,25 +1,34 @@
-import logo from './logo.svg';
-import './App.css';
+import { useDispatch, useSelector } from "react-redux";
+import "./App.css";
+import Box from "./components/Box";
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+	const num = useSelector((state) => state.num);
+	const dispatch = useDispatch();
+	const plus = () => {
+		dispatch({
+			type: "INCREASE",
+			payload: {
+				num: 5,
+			},
+		});
+	};
+	const minus = () => {
+		dispatch({
+			type: "DECREASE",
+			payload: {
+				num: 5,
+			},
+		});
+	};
+	return (
+		<div>
+			<button onClick={minus}>-</button>
+			<span>{num}</span>
+			<button onClick={plus}>+</button>
+			<Box />
+		</div>
+	);
 }
 
 export default App;
